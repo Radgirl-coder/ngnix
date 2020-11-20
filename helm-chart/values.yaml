@@ -1,0 +1,40 @@
+replicaCount: 1
+
+image:
+  repository: checkout-page
+  tag: latest
+  pullPolicy: IfNotPresent
+  imagePullSecrets: Always
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: NodePort
+  port: 80
+
+ingress:
+  enabled: false
+  annotations: {}
+     kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  paths: []
+  hosts:
+    - checkout-page.local
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+configValues: |
+  window.REACT_APP_API_URL='https://www.bookmarks.dev/api/public/bookmarks'
+  window.REACT_APP_ENVIRONMENT='LOCAL with helm'
+  window.REACT_APP_NAVBAR_COLOR='LightBlue'

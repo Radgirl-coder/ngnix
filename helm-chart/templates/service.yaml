@@ -1,0 +1,20 @@
+#Update services
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "checkout-page.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "echeckout-page.name" . }}
+    helm.sh/chart: {{ include "checkout-page.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: {{ include "checkout-page.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
