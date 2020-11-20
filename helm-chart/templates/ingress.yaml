@@ -1,14 +1,14 @@
 #Ingress
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include "checkout-page.fullname" . -}}
+{{- $fullName := include "nginx.fullname" . -}}
 {{- $ingressPath := .Values.ingress.path -}}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-    app.kubernetes.io/name: {{ include "checkout-page.name" . }}
-    helm.sh/chart: {{ include "checkout-page.chart" . }}
+    app.kubernetes.io/name: {{ include "nginx.name" . }}
+    helm.sh/chart: {{ include "nginx.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- with .Values.ingress.annotations }}
